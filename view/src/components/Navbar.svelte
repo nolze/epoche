@@ -1,8 +1,7 @@
 <script>
-  import router from 'page';
   import Link from '../components/Link.svelte';
 
-  import { wikiname } from '../lib';
+  import { router, wikiname } from '../lib';
 
   let keyword = null;
 

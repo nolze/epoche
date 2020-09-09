@@ -1,7 +1,5 @@
 <script>
-  import router from 'page';
-
-  import { basepath } from '../lib';
+  import { router, basepath } from '../lib';
 
   export let to;
 </script>

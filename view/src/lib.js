@@ -1,10 +1,13 @@
 import axios from 'axios';
 import { formatISO } from 'date-fns';
+import router from 'page';
 
 import store from './store';
 
 const basepath = window.basepath || '/';
 const wikiname = window.wikiname || 'Epoche';
+
+router.base(basepath.replace(/\/$/, ''));
 
 const api = axios.create({
   baseURL: `${basepath}api`,
@@ -36,4 +39,4 @@ const auth = {
   },
 };
 
-export { basepath, wikiname, api, formatTimestamp, auth };
+export { router, basepath, wikiname, api, formatTimestamp, auth };

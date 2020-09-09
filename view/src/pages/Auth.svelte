@@ -1,7 +1,5 @@
 <script>
-  import router from 'page';
-
-  import { api } from '../lib';
+  import { router, api } from '../lib';
   import store from '../store';
   import Navbar from '../components/Navbar.svelte';
   import Meta from '../components/Meta.svelte';

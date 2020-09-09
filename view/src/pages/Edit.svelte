@@ -1,11 +1,9 @@
 <script>
   import { onMount } from 'svelte';
-  import { api, auth } from '../lib';
+  import { router, api, auth } from '../lib';
   import store from '../store';
   import Link from '../components/Link.svelte';
   import Navbar from '../components/Navbar.svelte';
-
-  import router from 'page';
 
   export let params;
 
