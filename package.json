@@ -1,0 +1,51 @@
+{
+  "name": "epoche",
+  "version": "0.1.0",
+  "description": "A small wiki engine without complexity",
+  "keywords": [
+    "wiki",
+    "engine",
+    "markdown",
+    "sqlite3",
+    "cms"
+  ],
+  "homepage": "https://github.com/nolze/epoche",
+  "repository": "https://github.com/nolze/epoche",
+  "license": "MIT",
+  "author": "nolze <nolze@archlinux.us>",
+  "main": "epoche.js",
+  "bin": {
+    "epoche": "epoche.js"
+  },
+  "files": [
+    "server/src/**/*.js",
+    "view/public/",
+    "epoche.js",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "lint": "eslint ./epoche.js ./server/",
+    "prepack": "npm run --prefix ./view build",
+    "start": "node ./server/src/server.js"
+  },
+  "dependencies": {
+    "commander": "^6.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "knex": "^0.21.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "promptly": "^3.0.3",
+    "rehype-mathjax": "^3.0.0",
+    "rehype-stringify": "^8.0.0",
+    "remark-math": "^3.0.1",
+    "remark-parse": "^8.0.3",
+    "remark-rehype": "^7.0.0",
+    "sqlite3": "^5.0.0",
+    "unified": "^9.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.8.1"
+  }
+}
