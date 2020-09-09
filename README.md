@@ -1,4 +1,6 @@
 # Epoche
+[![npm version](https://img.shields.io/npm/v/epoche)](https://www.npmjs.com/package/epoche)
+[![npm downloads](https://img.shields.io/npm/dm/epoche)](https://www.npmjs.com/package/epoche)
 
 A small wiki engine without complexity.
 
