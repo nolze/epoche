@@ -3,11 +3,11 @@ import { formatISO } from 'date-fns';
 
 import store from './store';
 
-const basepath = window.basepath;
-const wikiname = window.wikiname;
+const basepath = window.basepath || '/';
+const wikiname = window.wikiname || 'Epoche';
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${basepath}api`,
 });
 
 function formatTimestamp(dt) {

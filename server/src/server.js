@@ -27,7 +27,12 @@ const WIKINAME = process.env.WIKINAME || 'Epoche';
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/', express.static(path.join(__dirname, VIEW_DIR)));
+app.use(
+  BASEPATH,
+  express.static(path.join(__dirname, VIEW_DIR), {
+    index: false,
+  }),
+);
 
 passport.use(
   new LocalStrategy(
@@ -71,7 +76,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/api/search', (req, res) => {
+const router = express.Router();
+app.use(BASEPATH, router);
+
+router.get('/api/search', (req, res) => {
   db.search(req.query.q, req.query.offset, req.query.limit, req.query.s)
     .then((pages) => {
       res.json({
@@ -84,7 +92,7 @@ app.get('/api/search', (req, res) => {
     });
 });
 
-app.post(
+router.post(
   '/api/auth',
   (req, res, next) => {
     passport.authenticate('local', (err, user, _info) => {
@@ -97,12 +105,12 @@ app.post(
   },
 );
 
-app.get('/api/auth/signout', function (req, res) {
+router.get('/api/auth/signout', function (req, res) {
   req.logout();
   res.json({ status: 200 });
 });
 
-app.get('/api/auth/user', function (req, res) {
+router.get('/api/auth/user', function (req, res) {
   if (req.isAuthenticated()) {
     res.json({ userid: req.user.userid });
   } else {
@@ -110,7 +118,7 @@ app.get('/api/auth/user', function (req, res) {
   }
 });
 
-app.get('/api/:pageid/markup', (req, res) => {
+router.get('/api/:pageid/markup', (req, res) => {
   db.getPage(req.params.pageid)
     .then((page) => {
       res.json(page);
@@ -121,7 +129,7 @@ app.get('/api/:pageid/markup', (req, res) => {
     });
 });
 
-app.get('/api/:pageid/history', (req, res) => {
+router.get('/api/:pageid/history', (req, res) => {
   db.getPageHistory(req.params.pageid, req.query.offset, req.query.limit)
     .then((pages) => {
       res.json({
@@ -134,7 +142,7 @@ app.get('/api/:pageid/history', (req, res) => {
     });
 });
 
-app.get('/api/:pageid', (req, res) => {
+router.get('/api/:pageid', (req, res) => {
   db.getPage(req.params.pageid)
     .then((page) => {
       converter.toHtml(page.content).then((html) => {
@@ -150,7 +158,7 @@ app.get('/api/:pageid', (req, res) => {
     });
 });
 
-app.post('/api/:pageid', (req, res) => {
+router.post('/api/:pageid', (req, res) => {
   if (!req.isAuthenticated()) {
     res.status(401).json();
   } else {
@@ -171,7 +179,7 @@ app.post('/api/:pageid', (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
+router.get('*', (req, res) => {
   fs.readFile(
     path.join(__dirname, `${VIEW_DIR}/index.html`),
     'utf8',
@@ -180,13 +188,14 @@ app.get('*', (req, res) => {
         res.sendStatus(500);
         throw err;
       }
-      data = data.replace('BASEPATH', `'${BASEPATH}'`);
-      data = data.replace('WIKINAME', `'${WIKINAME}'`);
+      data = data.replace(/\(BASEPATH\)/g, `'${BASEPATH}'`);
+      data = data.replace(/\(WIKINAME\)/g, `'${WIKINAME}'`);
+      data = data.replace(/\/build\//g, `${BASEPATH}build/`);
       res.send(data);
     },
   );
 });
 
 app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
+  console.log(`Listening on http://localhost:${port}${BASEPATH}`);
 });
