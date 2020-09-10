@@ -6,7 +6,7 @@
   }
 
   .main {
-    @apply p-4 mb-24 flex-grow;
+    @apply p-4 mb-24 flex-grow overflow-auto;
     max-width: 768px;
   }
 
@@ -36,7 +36,7 @@
 
   .content a,
   .link {
-    @apply text-blue-600 underline;
+    @apply text-blue-600 underline break-words break-all;
   }
 
   .content ul {
