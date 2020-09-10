@@ -18,7 +18,10 @@
   let query = {};
 
   let load = (ctx, next) => {
-    params = ctx.params;
+    params = Object.assign({}, ctx.params);
+    if (!!params.pageid && params.pageid.endsWith('/')) {
+      params.pageid = params.pageid.slice(0, -1);
+    }
     query = qs.parse(ctx.querystring);
 
     next();
