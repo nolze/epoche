@@ -43,11 +43,13 @@
             Snapshot version: {page.timestamp}
           </p>
         </div>
-      <div class="menu mt-1 text-sm flex">
-        <Link to="{params.pageid}/edit" class="mr-2 underline">Edit</Link>
-        <Link to="{params.pageid}/history" class="mr-2 underline">History</Link>
-        <Link to="{params.pageid}/source" class="mr-2 underline">Source</Link>
-      </div>
+        <div class="menu mt-1 text-sm flex">
+          <Link to="{params.pageid}/edit" class="mr-2 underline">Edit</Link>
+          <Link to="{params.pageid}/history" class="mr-2 underline">
+            History
+          </Link>
+          <Link to="{params.pageid}/source" class="mr-2 underline">Source</Link>
+        </div>
       {/await}
     </main>
   </div>

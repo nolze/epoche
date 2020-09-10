@@ -1,20 +1,19 @@
 <script>
-  import { api } from "../lib";
-  import Navbar from "../components/Navbar.svelte";
-  import Meta from "../components/Meta.svelte";
+  import { api } from '../lib';
+  import Navbar from '../components/Navbar.svelte';
+  import Meta from '../components/Meta.svelte';
 
   export let params;
 
   $: fetchPage = async () => {
     return await api
       .get('/page/markup', { params: { pageid: params.pageid } })
-      .then(resp => resp.data)
+      .then((resp) => resp.data)
       .catch(() => {});
   };
 </script>
 
 <style>
-
 </style>
 
 <div>

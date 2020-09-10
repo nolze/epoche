@@ -22,7 +22,7 @@
 
   $: onMount(async () => {
     let latestPage = await api
-      .get('/page/markup', { params: { pageid: params.pageid }})
+      .get('/page/markup', { params: { pageid: params.pageid } })
       .then((resp) => {
         let page = resp.data;
         if (!page.timestamp) isSubstantial = true;
