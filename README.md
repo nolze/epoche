@@ -37,9 +37,13 @@ For the moment, we recommend using Nginx, Apache, ... for load balancing, URL re
 epoche help
 ```
 
+## Extra syntax
+
+- **Wiki links:** `[<link text>](<page name>)` (eg. `[foo bar](FooBar)`)
+
 ## Todo
 
-- [ ] Wiki-style link
+- [x] Wiki-style link
 - [ ] History diff/restore/delete
 - [ ] Syntax highlighting
 - [ ] File uploads?
