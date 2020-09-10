@@ -39,6 +39,7 @@
     "promptly": "^3.0.3",
     "rehype-mathjax": "^3.0.0",
     "rehype-stringify": "^8.0.0",
+    "rehype-urls": "^1.1.1",
     "remark-math": "^3.0.1",
     "remark-parse": "^8.0.3",
     "remark-rehype": "^7.0.0",
