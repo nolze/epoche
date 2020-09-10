@@ -11,7 +11,7 @@
   import Auth from './pages/Auth.svelte';
   import Search from './pages/Search.svelte';
 
-  import { router, basepath } from './lib';
+  import { router } from './lib';
 
   let current = Page;
   let params = {};
@@ -32,7 +32,6 @@
   router('/:pageid(.*)/history', load, () => (current = History));
   router('/:pageid(.*)/source', load, () => (current = Source));
   router('/:pageid(.*)', load, () => (current = Page));
-  router('/:_(.*)', basepath + 'MainPage');
   router.start();
 </script>
 
