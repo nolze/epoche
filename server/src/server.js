@@ -118,8 +118,8 @@ router.get('/api/auth/user', function (req, res) {
   }
 });
 
-router.get('/api/:pageid/markup', (req, res) => {
-  db.getPage(req.params.pageid)
+router.get('/api/page/markup', (req, res) => {
+  db.getPage(req.query.pageid)
     .then((page) => {
       res.json(page);
     })
@@ -129,8 +129,8 @@ router.get('/api/:pageid/markup', (req, res) => {
     });
 });
 
-router.get('/api/:pageid/history', (req, res) => {
-  db.getPageHistory(req.params.pageid, req.query.offset, req.query.limit)
+router.get('/api/page/history', (req, res) => {
+  db.getPageHistory(req.query.pageid, req.query.offset, req.query.limit)
     .then((pages) => {
       res.json({
         pages: pages,
@@ -142,8 +142,8 @@ router.get('/api/:pageid/history', (req, res) => {
     });
 });
 
-router.get('/api/:pageid', (req, res) => {
-  db.getPage(req.params.pageid)
+router.get('/api/page', (req, res) => {
+  db.getPage(req.query.pageid)
     .then((page) => {
       converter.toHtml(page.content).then((html) => {
         page = Object.assign(page, {
@@ -158,12 +158,12 @@ router.get('/api/:pageid', (req, res) => {
     });
 });
 
-router.post('/api/:pageid', (req, res) => {
+router.post('/api/page', (req, res) => {
   if (!req.isAuthenticated()) {
     res.status(401).json();
   } else {
     db.upsertPage(
-      req.params.pageid,
+      req.query.pageid,
       req.body.title,
       req.body.content,
       req.body.isSubstantial,

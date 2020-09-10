@@ -7,7 +7,7 @@
 
   $: fetchPage = async () => {
     return await api
-      .get(`/${params.pageid}/markup`)
+      .get('/page/markup', { params: { pageid: params.pageid } })
       .then(resp => resp.data)
       .catch(() => {});
   };

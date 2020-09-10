@@ -8,7 +8,7 @@
 
   $: fetchHistory = async () => {
     return await api
-      .get(`/${params.pageid}/history`)
+      .get('/page/history', { params: { pageid: params.pageid } })
       .then((resp) => resp.data)
       .catch(() => {});
   };

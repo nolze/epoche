@@ -22,7 +22,7 @@
 
   $: onMount(async () => {
     let latestPage = await api
-      .get(`/${params.pageid}/markup`)
+      .get('/page/markup', { params: { pageid: params.pageid }})
       .then((resp) => {
         let page = resp.data;
         if (!page.timestamp) isSubstantial = true;
@@ -42,7 +42,7 @@
       isSubstantial: isSubstantial,
     };
     api
-      .post(`/${params.pageid}`, data)
+      .post('/page', data, { params: { pageid: params.pageid } })
       .then((resp) => {
         failed = false;
         router(`/${params.pageid}`);

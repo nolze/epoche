@@ -10,7 +10,7 @@
 
   $: fetchPage = async () => {
     return await api
-      .get(`/${params.pageid}`)
+      .get('/page', { params: { pageid: params.pageid } })
       .then((resp) => {
         let page = resp.data;
         page = Object.assign(page, {
