@@ -40,7 +40,7 @@
         </div>
         <div class="bottomline mt-8 text-sm">
           <p class="text-gray-600 italic font-serif">
-            Substantive revision: {page.timestamp}
+            Snapshot version: {page.timestamp}
           </p>
         </div>
       <div class="menu mt-1 text-sm flex">

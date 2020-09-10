@@ -93,7 +93,7 @@
           <span><input
               type="checkbox"
               class="mr-1"
-              bind:checked={isSubstantial} />Substantial revision
+              bind:checked={isSubstantial} />Take snapshot
           </span>
         </span>
         <Link to={params.pageid} class="text-sm link">Cancel</Link>
