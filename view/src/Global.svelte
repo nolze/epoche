@@ -47,11 +47,20 @@
     @apply list-decimal pl-12 my-4;
   }
 
-  .content ul ul,
-  .content ul ol,
-  .content ol ul,
-  .content ol ol {
+  .content li {
+    @apply my-1;
+  }
+
+  .content li ul,
+  .content li ol {
     @apply pl-6 my-0;
+  }
+
+  .content li {
+    pre,
+    blockquote {
+      @apply my-0;
+    }
   }
 
   .content .math-inline,
@@ -83,7 +92,9 @@
     @apply my-3;
   }
 
-  .content table tr, .content table td, .content table th {
+  .content table tr,
+  .content table td,
+  .content table th {
     @apply border px-2 py-1;
   }
 
