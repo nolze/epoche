@@ -30,9 +30,7 @@ epoche init ./epoche.db  # create & init database
 epoche start --db ./epoche.db --port 3000
 ```
 
-#### Daemonize:
-
-With [pm2](https://pm2.keymetrics.io/):
+With [pm2](https://pm2.keymetrics.io/) (daemonize):
 
 ```
 pm2 start epoche -- start --db ./epoche.db --port 3000
