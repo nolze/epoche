@@ -30,6 +30,14 @@ epoche init ./epoche.db  # create & init database
 epoche start --db ./epoche.db --port 3000
 ```
 
+#### Daemonize:
+
+With [pm2](https://pm2.keymetrics.io/):
+
+```
+pm2 start epoche -- start --db ./epoche.db --port 3000
+```
+
 For the moment, we recommend using Nginx, Apache, or the like for load balancing, URL rewriting (eg. /MainPage → /wiki/MainPage), etc.
 
 #### Help:
