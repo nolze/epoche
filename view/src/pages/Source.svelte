@@ -19,7 +19,8 @@
 <div>
   <main>
     {#await fetchPage() then page}
-      <Meta metadata={{ title: page.title }} />
+      <Meta
+        metadata={{ title: `Source of: ${params.pageid}`, robots: 'noindex, nofollow' }} />
       <div class="content">
         <textarea
           value={page.content}

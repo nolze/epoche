@@ -29,7 +29,8 @@
         <button class="hover:text-gray-600">Delete</button>
       </div>
       {#await fetchHistory() then history}
-        <Meta metadata={{ title: history.title }} />
+        <Meta
+          metadata={{ title: `History of: ${params.pageid}`, robots: 'noindex, nofollow' }} />
         {#each history.pages as page}
           <div class="flex items-center mb-1">
             <div class="mr-2"><input type="checkbox" /></div>

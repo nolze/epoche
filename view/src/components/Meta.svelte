@@ -9,4 +9,7 @@
     <meta property="og:title" content={metadata.title} />
     <meta property="twitter:title" content={metadata.title} />
   {/if}
+  {#if metadata.robots}
+    <meta name="robots" content={metadata.robots} />
+  {/if}
 </svelte:head>

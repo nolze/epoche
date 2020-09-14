@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { router, api, auth } from '../lib';
   import store from '../store';
+  import Meta from '../components/Meta.svelte';
   import Link from '../components/Link.svelte';
   import Navbar from '../components/Navbar.svelte';
 
@@ -58,6 +59,8 @@
 </style>
 
 <div>
+  <Meta
+    metadata={{ title: `Edit: ${params.pageid}`, robots: 'noindex, nofollow' }} />
   <Navbar />
   <div class="center-main">
     <main class="main">
