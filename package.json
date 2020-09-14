@@ -38,6 +38,7 @@
     "passport-local": "^1.0.0",
     "promptly": "^3.0.3",
     "rehype-mathjax": "^3.0.0",
+    "rehype-slug": "^3.0.0",
     "rehype-stringify": "^8.0.0",
     "rehype-urls": "^1.1.1",
     "remark-math": "^3.0.1",

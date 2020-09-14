@@ -5,6 +5,7 @@ const mathjax = require('rehype-mathjax');
 const remark2rehype = require('remark-rehype');
 const stringify = require('rehype-stringify');
 const urls = require('rehype-urls');
+const slug = require('rehype-slug');
 
 const path = require('path');
 
@@ -27,6 +28,7 @@ async function toHtml(markup) {
     .use(markdown)
     .use(math)
     .use(remark2rehype)
+    .use(slug)
     .use(urls, toWikiLink)
     .use(mathjax)
     .use(stringify)
