@@ -17,9 +17,11 @@ function isWikiLink(path) {
   return !r.test(path);
 }
 
-function toWikiLink(url, _node) {
+function toWikiLink(url, node) {
   if (isWikiLink(url.href)) {
     return path.join(BASEPATH, url.href);
+  } else {
+    node.properties.target = '_blank';
   }
 }
 
