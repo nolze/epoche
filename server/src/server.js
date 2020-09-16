@@ -80,7 +80,7 @@ const router = express.Router();
 app.use(BASEPATH, router);
 
 router.get('/api/search', (req, res) => {
-  db.search(req.query.q, req.query.offset, req.query.limit, req.query.ord)
+  db.search(req.query.q, req.query.start, req.query.limit, req.query.ord)
     .then((pages) => {
       res.json({
         pages: pages,
@@ -130,7 +130,7 @@ router.get('/api/page/markup', (req, res) => {
 });
 
 router.get('/api/page/history', (req, res) => {
-  db.getPageHistory(req.query.pageid, req.query.offset, req.query.limit)
+  db.getPageHistory(req.query.pageid, req.query.start, req.query.limit)
     .then((pages) => {
       res.json({
         pages: pages,
