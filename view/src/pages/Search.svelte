@@ -6,12 +6,12 @@
 
   export let query;
   $: q = query.q;
-  $: order = query.s || 'updated';
+  $: order = query.ord || 'updated';
   $: start = parseInt(query.start) || 0;
 
   $: fetchResults = async () => {
     return await api
-      .get(`/search`, { params: { q, start, s: order } })
+      .get(`/search`, { params: { q, start, ord: order } })
       .then((resp) => resp.data)
       .catch(() => {});
   };
@@ -28,12 +28,12 @@
       <div class="mb-4 text-sm flex">
         <span class="mr-1">Sort:</span>
         <Link
-          to="search?q={q}&s=updated"
+          to="search?q={q}{'&'}ord=updated"
           class={order === 'updated' ? 'font-bold' : ''}>
           Recently updated
         </Link><span class="mx-1">·</span>
         <Link
-          to="search?q={q}&s=alphabetical"
+          to="search?q={q}{'&'}ord=alphabetical"
           class={order === 'alphabetical' ? 'font-bold' : ''}>
           Alphabetical
         </Link>
@@ -51,11 +51,11 @@
       {/await}
       <div class="text-sm mt-8 flex">
         <Link
-          to="search?q={q}&s={order}&start=0"
+          to="search?q={q}{'&'}ord={order}&start=0"
           class={start === 0 ? 'text-gray-600' : ''}>
           Previous
         </Link><span class="mx-2" />
-        <Link to="search?q={q}&s={order}&start=0">Next</Link>
+        <Link to="search?q={q}{'&'}ord={order}&start=0">Next</Link>
       </div>
     </main>
   </div>

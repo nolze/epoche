@@ -24,10 +24,10 @@
         <Link to="" class="underline">Top</Link>
       </div>
       <div class="text-sm mx-2">
-        <Link to="search?q=*&s=updated" class="underline">Recent Changes</Link>
+        <Link to="search?q=*{'&'}ord=updated" class="underline">Recent Changes</Link>
       </div>
       <div class="text-sm mx-2">
-        <Link to="search?q=*&s=alphabetical" class="underline">Index</Link>
+        <Link to="search?q=*{'&'}ord=alphabetical" class="underline">Index</Link>
       </div>
       <form on:submit|preventDefault={search}>
         <input

@@ -80,7 +80,7 @@ const router = express.Router();
 app.use(BASEPATH, router);
 
 router.get('/api/search', (req, res) => {
-  db.search(req.query.q, req.query.offset, req.query.limit, req.query.s)
+  db.search(req.query.q, req.query.offset, req.query.limit, req.query.ord)
     .then((pages) => {
       res.json({
         pages: pages,
