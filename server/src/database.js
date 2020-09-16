@@ -191,7 +191,7 @@ async function getPage(pageid) {
 
 async function getPageHistory(pageid, offset, limit) {
   offset = offset || 0;
-  limit = limit && limit <= 50 ? limit : 10;
+  limit = !!limit && limit <= 50 ? limit : 10;
   const rows = await knex
     .select()
     .from('pages_archive')
@@ -207,7 +207,7 @@ async function getPageHistory(pageid, offset, limit) {
 
 async function search(q, offset, limit, order) {
   offset = offset || 0;
-  limit = limit && limit <= 50 ? limit : 10;
+  limit = !!limit && limit <= 50 ? limit : 10;
   order = order || 'updated';
 
   let orderBy = ['timestamp', 'desc'];
