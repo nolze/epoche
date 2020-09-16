@@ -8,10 +8,11 @@
   $: q = query.q;
   $: order = query.ord || 'updated';
   $: start = parseInt(query.start) || 0;
+  $: limit = parseInt(query.limit) || 10;
 
   $: fetchResults = async () => {
     return await api
-      .get(`/search`, { params: { q, start, ord: order } })
+      .get(`/search`, { params: { q, start, limit, ord: order } })
       .then((resp) => resp.data)
       .catch(() => {});
   };
@@ -51,11 +52,11 @@
       {/await}
       <div class="text-sm mt-8 flex">
         <Link
-          to="search?q={q}{'&'}ord={order}&start=0"
+          to="search?q={q}{'&'}ord={order}{'&'}start={start-limit < 0 ? 0 : start-limit}"
           class={start === 0 ? 'text-gray-600' : ''}>
           Previous
         </Link><span class="mx-2" />
-        <Link to="search?q={q}{'&'}ord={order}&start=0">Next</Link>
+        <Link to="search?q={q}{'&'}ord={order}{'&'}start={start+limit}">Next</Link>
       </div>
     </main>
   </div>
