@@ -51,7 +51,6 @@ epoche help
 ## Todo
 
 - [x] Wiki-style link
-- [ ] History diff/restore/delete
 - [ ] Syntax highlighting
 - [ ] File uploads?
 - [ ] Add tests
