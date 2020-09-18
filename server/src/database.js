@@ -189,6 +189,39 @@ async function getPage(pageid) {
   return rows.length > 0 ? rows[0] : {};
 }
 
+async function deletePage(pageid, timestamp) {
+  try {
+    await knex.transaction(async (trx) => {
+      let deletedNum = await knex('pages')
+        .where('pageid', pageid)
+        .andWhere('timestamp', timestamp)
+        .del()
+        .transacting(trx);
+
+      await knex('pages_archive')
+        .where('pageid', pageid)
+        .andWhere('timestamp', timestamp)
+        .del()
+        .transacting(trx);
+
+      if (deletedNum > 0) {
+        let row = await knex
+          .select()
+          .from('pages_archive')
+          .where('pageid', pageid)
+          .orderBy('timestamp', 'desc')
+          .first()
+          .transacting(trx);
+        if (row) {
+          await knex.insert(row).into('pages').transacting(trx);
+        }
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 async function getPageHistory(pageid, offset, limit) {
   offset = offset || 0;
   limit = !!limit && limit <= 50 ? limit : 10;
@@ -257,6 +290,7 @@ module.exports = {
   getUser,
   upsertPage,
   getPage,
+  deletePage,
   getPageHistory,
   search,
 };

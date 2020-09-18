@@ -179,6 +179,45 @@ router.post('/api/page', (req, res) => {
   }
 });
 
+router.delete('/api/page', (req, res) => {
+  if (req.isAuthenticated()) {
+    !!req.body.pageid &&
+      !!req.body.ts &&
+      db
+        .deletePage(req.body.pageid, req.body.ts)
+        .then(() => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.sendStatus(500);
+        });
+  } else {
+    res.sendStatus(401);
+  }
+});
+
+router.post('/api/delete_pages', (req, res) => {
+  if (req.isAuthenticated()) {
+    if (!Array.isArray(req.body.pages)) {
+      return res.sendStatus(400);
+    }
+    try {
+      req.body.pages.map((page) => {
+        !!page.pageid &&
+          !!page.ts &&
+          db.deletePage(page.pageid, page.ts).then();
+      });
+      return res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      return res.sendStatus(500);
+    }
+  } else {
+    return res.sendStatus(401);
+  }
+});
+
 router.get('*', (req, res) => {
   fs.readFile(
     path.join(__dirname, `${VIEW_DIR}/index.html`),
