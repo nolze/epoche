@@ -1,6 +1,7 @@
 const unified = require('unified');
 const markdown = require('remark-parse');
 const math = require('remark-math');
+const frontmatter = require('remark-frontmatter');
 const mathjax = require('rehype-mathjax');
 const remark2rehype = require('remark-rehype');
 const stringify = require('rehype-stringify');
@@ -28,6 +29,7 @@ function toWikiLink(url, node) {
 async function toHtml(markup) {
   return await unified()
     .use(markdown)
+    .use(frontmatter, ['yaml', 'toml'])
     .use(math)
     .use(remark2rehype)
     .use(slug)
