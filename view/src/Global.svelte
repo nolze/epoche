@@ -16,6 +16,7 @@
     }
   }
 
+  /* Headings */
   .content h1 {
     @apply text-2xl font-semibold mt-4 mb-2;
   }
@@ -34,9 +35,15 @@
     @apply font-semibold mt-6 mb-2;
   }
 
+  /* Links */
   .content a,
   .link {
     @apply text-blue-600 underline break-words break-all;
+  }
+
+  /* Lists */
+  .content ul, ol {
+    @apply list-outside;
   }
 
   .content ul {
@@ -61,6 +68,14 @@
     blockquote {
       @apply my-0;
     }
+  }
+
+  .content li.task-list-item {
+    @apply list-none -ml-5;
+  }
+
+  .content li.task-list-item > input[type='checkbox'] {
+    @apply mr-1;
   }
 
   .content .math-inline,
