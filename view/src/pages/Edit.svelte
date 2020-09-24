@@ -68,7 +68,7 @@
         type="text"
         class="title text-2xl mt-4 mb-4 w-full border-b focus:outline-none"
         bind:value={page.title} />
-      <div class="content">
+      <div>
         <div class="p-4 my-4 border">
           <textarea
             class="w-full h-64 focus:outline-none"
