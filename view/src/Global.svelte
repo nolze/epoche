@@ -42,7 +42,8 @@
   }
 
   /* Lists */
-  .content ul, ol {
+  .content ul,
+  ol {
     @apply list-outside;
   }
 
@@ -56,14 +57,12 @@
 
   .content li {
     @apply my-1;
-  }
 
-  .content li ul,
-  .content li ol {
-    @apply pl-6 my-0;
-  }
+    ul,
+    ol {
+      @apply pl-6 my-0;
+    }
 
-  .content li {
     pre,
     blockquote {
       @apply my-0;
@@ -72,6 +71,11 @@
 
   .content li.task-list-item {
     @apply list-none -ml-5;
+
+    ul,
+    ol {
+      @apply pl-10;
+    }
   }
 
   .content li.task-list-item > input[type='checkbox'] {
@@ -96,7 +100,7 @@
   }
 
   .content code {
-    @apply rounded px-2 py-1 bg-gray-100;
+    @apply rounded px-2 py-1 bg-gray-100 text-sm;
   }
 
   .content pre > code {
