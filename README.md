@@ -1,6 +1,7 @@
 # Epoche
 [![npm version](https://img.shields.io/npm/v/epoche)](https://www.npmjs.com/package/epoche)
 [![npm downloads](https://img.shields.io/npm/dm/epoche)](https://www.npmjs.com/package/epoche)
+[![CI](https://github.com/nolze/epoche/workflows/CI/badge.svg)](https://github.com/nolze/epoche/actions?query=workflow%3ACI)
 
 A modern, small wiki engine without complexity. **See it in action:** <https://epoche.org/wiki/>
 
