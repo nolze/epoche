@@ -197,6 +197,20 @@ router.delete('/api/page', (req, res) => {
   }
 });
 
+router.post('/api/preview_page', (req, res) => {
+  if (!req.isAuthenticated()) {
+    res.status(401).json();
+  } else {
+    converter.toHtml(req.body.content).then((html) => {
+      let page = {
+        title: req.body.title,
+        content: html,
+      };
+      res.json(page);
+    });
+  }
+});
+
 router.post('/api/delete_pages', (req, res) => {
   if (req.isAuthenticated()) {
     if (!Array.isArray(req.body.pages)) {

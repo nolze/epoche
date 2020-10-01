@@ -15,6 +15,7 @@
     content: null,
   };
   let failed = false;
+  let previewPage = null;
 
   auth.fetchUser();
   store.user.subscribe((value) => {
@@ -35,6 +36,27 @@
       .catch(() => {});
     page = Object.assign(page, latestPage);
   });
+
+  function preview() {
+    let data = {
+      title: page.title,
+      content: page.content,
+      isSubstantial: isSubstantial,
+    };
+    api
+      .post('/preview_page', data, {
+        params: { pageid: params.pageid, preview: 1 },
+      })
+      .then((resp) => {
+        failed = false;
+        previewPage = resp.data;
+        location.hash = '#preview';
+      })
+      .catch((_err) => {
+        // console.log(err);
+        failed = true;
+      });
+  }
 
   function submit() {
     let data = {
@@ -64,6 +86,21 @@
   <Navbar />
   <div class="center-main">
     <main class="main">
+      {#if !!previewPage}
+        <div id="preview" class="shadow px-6 py-4 mb-4">
+          <div class="-mb-1 -ml-2">
+            <span class="px-2 py-1 rounded text-xs bg-gray-100">Preview</span>
+          </div>
+          <h1 class="title text-2xl mt-4 mb-4 font-semibold">
+            {previewPage.title}
+          </h1>
+          <div class="content">
+            <p>
+              {@html previewPage.content}
+            </p>
+          </div>
+        </div>
+      {/if}
       <input
         type="text"
         class="title text-2xl mt-4 mb-4 w-full border-b focus:outline-none"
@@ -77,7 +114,9 @@
       </div>
       <div class="mb-2 flex items-center">
         <span class="text-sm mr-1">As:</span>{#if !!user}
-          <span class="text-sm">{user.userid}</span><button on:click|preventDefault={auth.signout} class="ml-4
+          <span class="text-sm">{user.userid}</span><button
+            on:click|preventDefault={auth.signout}
+            class="ml-4
               text-sm text-gray-600">Sign out</button>
         {:else}
           <span class="text-sm">–</span>
@@ -87,23 +126,28 @@
             Sign in
           </Link>
         {/if}
+        {#if failed}
+          <div class="ml-3 text-sm text-red-800">Please sign in.</div>
+        {/if}
       </div>
       <div class="flex items-center">
-        <span class="mr-4 text-sm">
+        <div class="mr-1 text-sm">
+          <button
+            on:click={preview}
+            class="text-sm font-semibold mr-1 text-gray-600 hover:text-gray-700">Preview</button>
+        </div>
+        <div class="mr-4 text-sm">
           <button
             on:click={submit}
-            class="text-sm font-semibold mr-1 text-black hover:text-gray-600">Save</button>
+            class="text-sm font-semibold mr-1 text-black hover:text-gray-700">Save</button>
           <span><input
               type="checkbox"
               class="mr-1"
               bind:checked={isSubstantial} />Take snapshot
           </span>
-        </span>
+        </div>
         <Link to={params.pageid} class="text-sm link">Cancel</Link>
       </div>
-      {#if failed}
-        <div class="mt-2 text-sm text-red-800">Please sign in.</div>
-      {/if}
     </main>
   </div>
 </div>
