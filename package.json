@@ -27,7 +27,8 @@
   "scripts": {
     "lint": "eslint ./epoche.js ./server/",
     "prepack": "npm run --prefix ./view build",
-    "start": "node ./server/src/server.js"
+    "start:server": "node ./epoche.js start",
+    "start:view": "npm run --prefix ./view dev"
   },
   "dependencies": {
     "commander": "^6.1.0",
