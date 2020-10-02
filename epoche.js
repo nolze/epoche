@@ -45,33 +45,46 @@ program
     'initialize database at <dir_or_filename> (default filename: `epoche.db`)',
   )
   .action(async (dir_or_filename) => {
-    const isDir = await fs
-      .lstat(dir_or_filename)
-      .then((stat) => stat.isDirectory())
-      .catch((err) => console.error(err));
-    process.env.DB_PATH = isDir
-      ? path.join(dir_or_filename, DB_DEFAULT)
-      : dir_or_filename;
-    await db.initialize();
-    const wikiname = await promptly.prompt('Wiki name (default: `Epoche`): ', {
-      default: 'Epoche',
-    });
-    await db.setWikiname(wikiname);
-    const basepath = await promptly.prompt('Wiki base path (default: `/`): ', {
-      default: '/',
-    });
-    await db.setBasepath(basepath);
-    const userid = await promptly.prompt('Default username: ');
-    const password = await promptly.prompt('Default password: ', {
-      silent: true,
-    });
-    await db.addUser(userid, password);
-    await db.upsertPage(...fixture1);
-    await db.upsertPage(...fixture2);
-    db.destroy();
-    console.log(
-      `Done! To start, run: epoche start --db ${process.env.DB_PATH}`,
-    );
+    try {
+      const isDir = await fs
+        .lstat(dir_or_filename)
+        .then((stat) => stat.isDirectory())
+        .catch((_err) => {
+          /* No file or else */
+        });
+      process.env.DB_PATH = isDir
+        ? path.join(dir_or_filename, DB_DEFAULT)
+        : dir_or_filename;
+      await db.initialize();
+      const wikiname = await promptly.prompt(
+        'Wiki name (default: `Epoche`): ',
+        {
+          default: 'Epoche',
+        },
+      );
+      await db.setWikiname(wikiname);
+      const basepath = await promptly.prompt(
+        'Wiki base path (default: `/`): ',
+        {
+          default: '/',
+        },
+      );
+      await db.setBasepath(basepath);
+      const userid = await promptly.prompt('Default username: ');
+      const password = await promptly.prompt('Default password: ', {
+        silent: true,
+      });
+      await db.addUser(userid, password);
+      await db.upsertPage(...fixture1);
+      await db.upsertPage(...fixture2);
+      db.destroy();
+      console.log(
+        `Done! To start, run: epoche start --db ${process.env.DB_PATH}`,
+      );
+    } catch (_) {
+      // TODO: Clean up if a new file is created
+      process.exit(-1);
+    }
   });
 
 program
