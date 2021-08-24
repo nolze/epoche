@@ -52,6 +52,7 @@ epoche help
 ## Todo
 
 - [x] Wiki-style link
+- [ ] [Pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) (required for the newer unified.js)
 - [ ] Syntax highlighting
 - [ ] File uploads?
 - [ ] Add tests
